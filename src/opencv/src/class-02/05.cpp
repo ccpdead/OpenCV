@@ -1,5 +1,5 @@
 /**
- * Shi-Tomasi角点检测
+ * SIFT角点检测
  */
 
 #include "iostream"
@@ -13,7 +13,7 @@ using namespace cv::xfeatures2d;
 int main(int argc, char** argv) {
     Mat src;
 
-    // src = imread("/home/jhr/catkin_ws/image/people2.jpg");
+    // src = imread("/home/jhr/catkin_ws/image/way1.png");
     // if (src.empty()) {
     //     printf("could not load image\n");
     //     return -1;
@@ -24,18 +24,17 @@ int main(int argc, char** argv) {
         printf("could not open camera");
         return -1;
     }
-
     while (1) {
         cap >> src;
         if (src.empty()) {
             break;
         }
-
         resize(src, src, Size(640, 480), 0, 0, 1);
+
         cvtColor(src, src, COLOR_BGR2GRAY);
         imshow("input", src);
 
-        int numFeatures = 200;
+        int numFeatures = 100;
         Ptr<SIFT> detector = SIFT::create(numFeatures);//创建检测器
         vector<KeyPoint> keypoints;
         detector->detect(src, keypoints, Mat());
